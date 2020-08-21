@@ -1,0 +1,17 @@
+﻿@model WebUI.Models.CategoryListViewModel
+<div class="sidebar-categories">
+    <div class="head">Kategoriler</div>
+    <ul class="main-categories">
+        <li class="common-filter">
+            <form action="#">
+                <ul>
+                    <li class="filter-list"><a asp-action="Index" asp-controller="Product">Tüm Ürünler</a></li>
+                    @foreach (var ctg in Model.CategoryModels)
+                    {
+                        <li class="filter-list"><a asp-action="ProductList" asp-controller="Default" asp-route-id="@ctg.Id">@ctg.Name <span>(@ctg.Count)</span></a></li>
+                    }
+                </ul>
+            </form>
+        </li>
+    </ul>
+</div>

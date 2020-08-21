@@ -1,0 +1,55 @@
+﻿@model WebUI.Models.UserOrderListViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@if (Model.UserOrderModels.Count > 0)
+{
+<table class="table table-bordered table-hover my-4">
+    <tr>
+        <th>Sipariş Numarası</th>
+        <th>Sipariş Tarihi</th>
+        <th>Toplam Tutar(₺)</th>
+        <th>Sipariş Durumu</th>
+        @*<th></th>*@
+    </tr>
+    <tbody>
+        @foreach (var order in Model.UserOrderModels)
+        {
+            <tr>
+                <td>@order.OrderNumber</td>
+                <td>@order.OrderDate.ToString("D")</td>
+                <td>@order.Total</td>
+                <td>
+                    @if (order.OrderState == Entities.Enums.OrderState.Bekleniyor)
+                    {
+                        <p>Sipariş Bekleniyor</p>
+                    }
+                    else if (order.OrderState == Entities.Enums.OrderState.Tamamlandı)
+                    {
+                        <p>Sipariş Tamamlandı</p>
+                    }
+                    else if (order.OrderState == Entities.Enums.OrderState.Paketlendi)
+                    {
+                        <p>Sipariş Paketlendi</p>
+                    }
+                    else
+                    {
+                        <p>Sipariş Kargolandı</p>
+                    }
+                </td>
+                @*<td>
+                    <a asp-route-id="@order.Id" asp-action="Details" asp-controller="Account" class="btn btn-primary">Sipariş Detayı</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <div class="text-center">
+        <h2>Henüz alışveriş yapmadınız</h2>
+    </div>
+}
+

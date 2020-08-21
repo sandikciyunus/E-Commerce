@@ -1,0 +1,60 @@
+﻿@model WebUI.Models.AppUserAddViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Kayıt Ol</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login_box_area section-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login_box_img">
+                        <div class="hover">
+                            <h4>Hesabın Var Mı?</h4>
+                            <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                            <a class="button button-account" asp-action="Login" asp-controller="Account">Giriş Yap</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login_form_inner register_form_inner">
+                        <h3>Hesap Oluştur</h3>
+                        <form class="row login_form" id="register_form" method="post">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="name" required="" asp-for="UserName" placeholder="Kullanıcı Adı" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kullanıcı Adı'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="email" required="" asp-for="Email" placeholder="Email Adresi" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Adresi'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="password" class="form-control" id="password" required="" asp-for="Password" placeholder="Şifre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Şifre'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="password" class="form-control" id="confirmPassword" required="" asp-for="ConfirmPassword" placeholder="Tekrar Şifre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tekrar Şifre'">
+                            </div>
+                            @*<div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input type="checkbox" id="f-option2" name="selector">
+                                    <label for="f-option2">Keep me logged in</label>
+                                </div>
+                            </div>*@
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit" class="button button-register w-100">Kayıt Ol</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

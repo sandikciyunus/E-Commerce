@@ -1,0 +1,52 @@
+﻿@model WebUI.Models.ProductListViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+    <section class="hero-banner">
+        <div class="container">
+            <div class="row no-gutters align-items-center pt-60px">
+                <div class="col-5 d-none d-sm-block">
+                    <div class="hero-banner__img">
+                        <img class="img-fluid" src="~/aroma/img/home/hero-banner.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+                    <div class="hero-banner__content">
+                        <h4>Alışveriş eğlenceli</h4>
+                        <h1>GROSSBECHER</h1>
+                        <p>Günlük bakım, onarım işlerini de hızlandıran yağlama, pas sökücü veya krakex5 spreyleri sayesinde sadece araç sahiplerinin ve servislerin değil herkesin hayatını kolaylaştırıyor.</p>
+                        <a class="button button-hero" asp-controller="Product" asp-action="Index">Şimdi Gözatın</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-margin calc-60px">
+        <div class="container">
+            <div class="section-intro pb-60px">
+                <h2>Son <span class="section-intro__style">Ürünler</span></h2>
+            </div>
+            <div class="owl-carousel owl-theme" id="bestSellerCarousel">
+                @foreach (var product in Model.Products)
+                {
+                <div class="card text-center card-product">
+                    <div class="card-product__img">
+                        <img class="img-fluid" src="~/img/@product.Image" alt="">
+                    </div>
+                    <div class="card-body">
+                        <p>@product.Category.Name</p>
+                        <h4 class="card-product__title"><a asp-action="ProductDetail" asp-route-id="@product.Id" asp-controller="Product" asp-route-categoryId="@product.CategoryId">@product.Name</a></h4>
+                        <p class="card-product__price">₺@product.Price</p>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
+

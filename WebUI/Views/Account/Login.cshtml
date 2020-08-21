@@ -1,0 +1,54 @@
+﻿@model WebUI.Models.AppUserLoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Giriş Yap</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login_box_area section-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login_box_img">
+                        <div class="hover">
+                            <h4>Web Sitemizde Yeni Misiniz?</h4>
+                            <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                            <a class="button button-account" asp-action="Create" asp-controller="Account">Hesap Oluştur</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login_form_inner">
+                        <h3>Giriş Ekranı</h3>
+                        <form class="row login_form" id="contactForm" method="post">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="name" asp-for="UserName" required="" placeholder="Kullanıcı Adı" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kullanıcı Adı'">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="password" class="form-control" id="name" asp-for="Password" required="" placeholder="Şifre" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Şifre'">
+                            </div>
+                            @*<div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input type="checkbox" id="f-option2" name="selector">
+                                    <label for="f-option2">Keep me logged in</label>
+                                </div>
+                            </div>*@
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit" class="button button-login w-100">Giriş Yap</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

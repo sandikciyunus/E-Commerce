@@ -1,0 +1,25 @@
+﻿@model WebUI.Models.CategoryListViewModel
+@{
+    ViewData["Title"] = "CategoryList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<table class="table table-bordered table-hover my-2">
+    <tr>
+        <th>Ad</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+         @foreach(var ctg in Model.Categories)
+         {
+             <tr>
+                 <td>@ctg.Name</td>
+                 <td>
+                     <a class="btn btn-warning" asp-action="CategoryUpdate" asp-controller="Admin" asp-route-id="@ctg.Id">Güncelle</a>
+                     <a href="javascript:void(0);" class="btn btn-danger btn-delete" data-id="@ctg.Id"
+                        data-text="Kategoriyi silmek üzeresiniz" data-url="/Admin/CategoryDelete?id=">Sil</a>
+                 </td>
+             </tr>
+         }
+    </tbody>
+</table>
+<a class="btn btn-info" asp-action="CategoryAdd" asp-controller="Admin">Kategori Ekle</a>

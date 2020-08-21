@@ -1,0 +1,33 @@
+﻿@model WebUI.Models.ProductListViewModel
+@{
+    ViewData["Title"] = "ProductList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered table-hover my-2">
+    <tr>
+        <th>Ad</th>
+        <th>Fiyat</th>
+        <th>Stok</th>
+        <th>Kategori</th>
+        <th>İşlemler</th>
+    </tr>
+    <tbody>
+        @foreach(var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Stock</td>
+                <td>@product.Category.Name</td>
+                <td>
+                    <a asp-action="ProductUpdate" asp-controller="Admin" class="btn btn-warning" asp-route-id="@product.Id">Güncelle</a>
+                    <a asp-action="ProductDelete" asp-controller="Admin" class="btn btn-danger" asp-route-id="@product.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="ProductAdd" asp-controller="Admin" class="btn btn-info">Ürün Ekle</a>
+

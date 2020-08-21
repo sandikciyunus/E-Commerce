@@ -1,0 +1,60 @@
+﻿@model WebUI.Models.OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<table class="table table-bordered table-hover my-4">
+    <tr>
+        <th>Sipariş Numarası</th>
+        <th>Sipariş Tarihi</th>
+        <th>Toplam Tutar(₺)</th>
+        <th>Sipariş Durumu</th>
+        <th>Adres</th>
+    </tr>
+    <tbody>
+        
+            <tr>
+                <td>@Model.OrderDetails.OrderNumber</td>
+                <td>@Model.OrderDetails.OrderDate.ToString("D")</td>
+                <td>@Model.OrderDetails.Total</td>
+                <td>@Model.OrderDetails.OrderState</td>
+                <td>@Model.OrderDetails.Address
+                <br />
+                @Model.OrderDetails.City
+                <br />
+                @Model.OrderDetails.District
+                <br />
+                @Model.OrderDetails.Parish
+                <br />
+                @Model.OrderDetails.PostCode
+                </td>
+            </tr>
+        
+    </tbody>
+</table>
+
+<table class="table table-bordered table-hover my-4">
+    <tr>
+        <th>Ürün Adı</th>
+        <th>Toplam Tutar(₺)</th>
+        <th>Adet</th>
+        <th>Ürün Detay</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.OrderDetails.OrderLineModels)
+        {
+        <tr>
+            <td>@item.ProductName</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td>
+                <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@item.ProductId" target="_blank" class="btn btn-primary">Ürün Detay</a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+

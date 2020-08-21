@@ -1,0 +1,172 @@
+﻿@model WebUI.Models.ProductDetailViewModel
+@{
+    ViewData["Title"] = "ProductDetail";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<input type="hidden" asp-for="Id"/>
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-6">
+                    <div class="owl-carousel owl-theme s_Product_carousel">
+                        <div class="single-prd-item">
+                            <img class="img-fluid" src="~/img/@Model.Image" alt="">
+                        </div>
+                        <!-- <div class="single-prd-item">
+                        <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+                    </div>
+                    <div class="single-prd-item">
+                        <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+                    </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>@Model.Name</h3>
+                        <h2>₺@Model.Price</h2>
+                        <ul class="list">
+                            <li><a class="active" href="#"><span>Kategori</span> : @Model.Category.Name</a></li>
+                            <li><a href="#"><span>Stok Sayısı</span> : @Model.Stock</a></li>
+                        </ul>
+                        <p>
+                            @Model.Name
+                        </p>
+                        <div class="product_count">
+                           
+                            @*<label for="qty">Miktar:</label>
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    class="increase items-count" type="button">
+                                <i class="ti-angle-left"></i>
+                            </button>
+                            <input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    class="reduced items-count" type="button">
+                                <i class="ti-angle-right"></i>
+                            </button>*@
+                            <a class="button primary-btn" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">Sepete Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="product_description_area">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ürün Açıklaması</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                       aria-selected="false">Yorumlar</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <p>
+                        <h2>Ürün Açıklaması</h2>
+                        @Model.Description
+                    </p>
+                    <p>
+                        <h2>Ürün Kullanımı</h2>
+                        @Model.Use
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="comment_list">
+                                @if(Model.Comments.Count==0)
+                                {
+                                    <div class="text-center">
+                                        <p>Henüz yorum yapılmadı</p>
+                                    </div>
+                                }
+                                @foreach (var comment in Model.Comments)
+                                {
+                                <div class="review_item">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h4>@comment.UserName</h4>
+                                            <h5>@comment.Date.ToString("D")</h5>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        @comment.Message
+                                    </p>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="review_box">
+                                <h4>Bir Yorum Yap</h4>
+                                <form class="row contact_form" action="/Product/AddComment" method="post">
+                                    <input type="hidden" name="ProductId" value="@Model.Id" />
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" disabled="disabled" class="form-control" id="number" name="UserName" value="@User.Identity.Name">
+                                        </div>
+                                    </div>
+                                    }
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="number" name="PhoneNumber" required="" placeholder="Telefon Numarası">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="Message" id="message" rows="1" required="" placeholder="Yorum"></textarea>
+                                        </div>
+                                    </div>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" value="submit" class="btn primary-btn">Yorumu Gönder</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" disabled="disabled" value="submit" class="btn primary-btn">Yorumu Göndermek İçin Giriş Yap</button>
+                                        </div>
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-product-area section-margin--small mt-0">
+        <div class="container">
+            <div class="section-intro pb-60px">
+                <h2>İlişkili <span class="section-intro__style">Ürünler</span></h2>
+            </div>
+            <div class="row mt-30">
+                @foreach (var product in Model.Products)
+                {
+                <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+                    <div class="single-search-product-wrapper">
+                        <div class="single-search-product d-flex">
+                            <a><img src="~/img/@product.Image" alt=""></a>
+                            <div class="desc">
+                                <a asp-action="ProductDetail" asp-controller="Product" asp-route-id="@product.Id" asp-route-categoryId="@product.CategoryId" class="title">@product.Name</a>
+                                <div class="price">₺@product.Price</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                }
+
+            </div>
+        </div>
+    </section>
+

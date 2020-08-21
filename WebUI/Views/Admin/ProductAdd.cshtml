@@ -1,0 +1,57 @@
+﻿@model WebUI.Models.ProductAddViewModel
+@{
+    ViewData["Title"] = "ProductAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <form asp-controller="Admin" asp-action="ProductAdd" method="post" enctype="multipart/form-data" >
+        <div class="form-group">
+            <label>Ad</label>
+            <input asp-for="Name" class="form-control" placeholder="Ürün Adı" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama</label>
+            <textarea class="form-control" asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Kullanım Şekli</label>
+            <textarea class="form-control" asp-for="Use"></textarea>
+            <span asp-validation-for="Use" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Resim</label>
+            <input type="hidden" name="Image" value="@Model.Image" />
+            @*<input asp-for="Image" class="form-control" placeholder="Image Url" />*@
+            <input type="file" name="file"  value="" />
+        </div>
+
+        <div class="form-group">
+            <label>Fiyat</label>
+            <input asp-for="Price" class="form-control" placeholder="Ürün Fiyatı" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Stok Sayısı</label>
+            <input asp-for="Stock" class="form-control" placeholder="Stok Sayısı" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Kategori Adı</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
+        </div>
+
+
+
+
+        <input type="submit" value="Ürün Ekle" class="btn btn-xs btn-success" />
+    </form>
+
+
+

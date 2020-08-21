@@ -1,0 +1,55 @@
+﻿@model WebUI.Models.ShippingDetaill
+@{
+    ViewData["Title"] = "CheckOut";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Sipariş Ver</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="checkout_area section-margin--small">
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3>Sipariş Detayları</h3>
+                        <form class="row contact_form" method="post" asp-action="CheckOut" asp-controller="Cart">
+                            <div class="col-md-12 form-group">
+                                @User.Identity.Name
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="address" name="Address" asp-for="Address" placeholder="Adres">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="city" name="City" asp-for="City" placeholder="Şehir">
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                <input type="text" class="form-control" id="district" name="District" asp-for="District" placeholder="İlçe">
+                                <span asp-validation-for="District" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="parish" name="Parish" asp-for="Parish" placeholder="Mahalle">
+                                <span asp-validation-for="Parish" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="postcode" name="PostCode" asp-for="PostCode" placeholder="Posta Kodu">
+                                <span asp-validation-for="PostCode" class="text-danger"></span>
+                            </div>
+                            <input type="submit" class="btn btn-info" value="Siparişi ver" />
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

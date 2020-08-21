@@ -1,0 +1,105 @@
+﻿@model WebUI.Models.CartSummaryViewModel
+@{
+    ViewData["Title"] = "GetCart";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Alışveriş Sepeti</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ürün</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Miktar</th>
+                                <th scope="col">Toplam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cart in Model.Cart.CartLines)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p>@cart.Product.Name</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>₺@cart.Product.Price</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input type="text" disabled="disabled" name="qty" id="sst" maxlength="12" value="@cart.Quantity" title="Quantity:"
+                                                   class="input-text qty">
+                                            @*<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                                    class="increase items-count" type="button">
+                                                <i class="lnr lnr-chevron-up"></i>
+                                            </button>
+                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                                    class="reduced items-count" type="button">
+                                                <i class="lnr lnr-chevron-down"></i>
+                                            </button>*@
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>₺@Convert.ToInt32(cart.Product.Price*cart.Quantity)</h5>
+                                    </td>
+                                    <td><a asp-controller="Cart" asp-action="Remove" asp-route-id="@cart.Product.Id" class="btn btn-danger">Sil</a></td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <h5>Toplam Tutar</h5>
+                                </td>
+                                <td>
+                                    <h5>₺@Model.Cart.Total</h5>
+                                </td>
+                            </tr>
+                            <tr class="out_button_area">
+                                <td class="d-none-l">
+                                </td>
+                                <td class="">
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" asp-action="Index" asp-controller="Product">Alışverişe devam et</a>
+                                        @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                                        {
+                                            <a class="primary-btn ml-2" asp-controller="Cart" asp-action="CheckOut">Alışverişi Tamamla</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="primary-btn ml-2" asp-controller="Account" asp-action="Login">Alışverişi tamamlamak için giriş yap</a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+

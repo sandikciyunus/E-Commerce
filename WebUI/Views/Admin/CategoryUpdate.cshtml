@@ -1,0 +1,29 @@
+﻿@model WebUI.Models.CategoryUpdateViewModel
+@{
+    ViewData["Title"] = "CategoryUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form asp-controller="Admin" asp-action="CategoryUpdate" method="post">
+    <input type="hidden"  asp-for="Id"/>
+<div class="form-group">
+    <label>Ad</label>
+    <input asp-for="Name" class="form-control" placeholder="Kategori Adı" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+@*<div class="form-group">
+        <label asp-for="Product.CategoryId"></label>
+        <select asp-for="Product.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"CategoryId","CategoryName"))"></select>
+        <span asp-validation-for="Product.CategoryId"></span>
+    </div>*@
+
+
+
+
+<input type="submit" value="Kategori Güncelle" class="btn btn-xs btn-success" />
+</form>
+
+
+
+
